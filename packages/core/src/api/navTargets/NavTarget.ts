@@ -17,9 +17,13 @@
 import type { NavTargetConfig, NavTargetOverrideConfig } from './types';
 
 export class MutableNavTarget {
-  private effectiveConfig: NavTargetConfig = this.config;
+  private readonly config: NavTargetConfig;
+  private effectiveConfig: NavTargetConfig;
 
-  constructor(private readonly config: NavTargetConfig) {}
+  constructor(config: NavTargetConfig) {
+    this.config = config;
+    this.effectiveConfig = config;
+  }
 
   override(overrideConfig: NavTargetOverrideConfig) {
     this.effectiveConfig = { ...this.config, ...overrideConfig };
